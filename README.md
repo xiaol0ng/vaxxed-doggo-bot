@@ -4,19 +4,22 @@ A bot doggo with some features both useful and useless.
 
 ## Main Commands
 
-+ !vaxd doggo_id
++ !d/vaxd doggo_id
 
     Display info about the specified doggo.
 
-+ !a/!activity
++ !s/!summary
 
+    Display a summary of doggo market status.
+
++ !lt/!latest_trades
     Display latest trades.
 
 + !m/!meme
 
     Display a random meme image.
 
-+ !s/!sol
++ !sol
 
     Display SOL market status.
 

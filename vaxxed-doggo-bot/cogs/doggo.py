@@ -5,6 +5,7 @@ import discord
 from discord.ext import commands
 
 from .. import config
+from .. import utils
 
 ATTRIBUTES = {}
 for doggo in config.doggos.values():
@@ -42,8 +43,11 @@ class DoggoInfo(commands.Cog):
                 )
                 return
 
-            if msg_to_list[0] != "!vaxd":
+            if msg_to_list[0] not in ["!d", "!vaxd"]:
                 return
+
+            listings = utils.get_data()["listings"]
+            listings = {doggo["tokenMint"]: doggo["price"] for doggo in listings}
 
             try:
                 doggo_id = int(msg_to_list[1])
@@ -59,7 +63,9 @@ class DoggoInfo(commands.Cog):
                     r = requests.get(url, headers=config.solscan_headers).json()
                     owner = r["data"]["result"][0]["owner"]
                     if owner == config.owner_address_magic_eden:
-                        title = f"Vaxxed Doggo #{doggo_id}"
+                        title = "Vaxxed Doggo #{}    Price: {} SOL".format(
+                            doggo_id, listings[token]
+                        )
                         url = f"https://magiceden.io/item-details/{token}"
                     elif owner == config.owner_address_solanart:
                         title = f"Vaxxed Doggo #{doggo_id}"
@@ -78,7 +84,9 @@ class DoggoInfo(commands.Cog):
                                 )
                             )
                         else:
-                            attributes.append("{}: {} (1/1)".format(*attribute.values()))
+                            attributes.append(
+                                "{}: {} (1/1)".format(*attribute.values())
+                            )
 
                     formatted_attributes = "\n".join(attributes)
                     formatted_attributes = "```{}```".format(formatted_attributes)

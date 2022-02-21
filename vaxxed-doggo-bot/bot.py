@@ -3,10 +3,11 @@ from discord.ext import commands
 from . import config
 from .cogs.scam import ScamAlert
 from .cogs.doggo import DoggoInfo
-from .cogs.activity import Activity
+from .cogs.market import Market
 from .cogs.meme import Meme
 from .cogs.solana import SolanaMarketStatus
 from .cogs.help import HelpInfo
+from .cogs.data import DataManager
 
 
 class VaxxedDoggoBot(commands.Bot):
@@ -24,9 +25,10 @@ class VaxxedDoggoBot(commands.Bot):
 if __name__ == "__main__":
     bot = VaxxedDoggoBot()
     bot.add_cog(HelpInfo(bot))
+    bot.add_cog(DataManager(bot))
     bot.add_cog(ScamAlert(bot))
     bot.add_cog(DoggoInfo(bot))
-    bot.add_cog(Activity(bot))
+    bot.add_cog(Market(bot))
     bot.add_cog(Meme(bot))
     bot.add_cog(SolanaMarketStatus(bot))
     bot.run(config.token)

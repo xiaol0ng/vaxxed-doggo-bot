@@ -1,5 +1,4 @@
 from typing import List
-from secrets import choice
 
 import discord
 from discord.ext import commands
@@ -7,10 +6,11 @@ from discord.ext import commands
 from .. import config
 
 command_help = {
-    "!vaxd doggo_id": "Display info about the specified doggo.",
-    "!a/!activity": "Display latest trades.",
+    "!d/vaxd doggo_id": "Display info about the specified doggo.",
+    "!s/!summary": "Display a summary of doggo market status.",
+    "!lt/latest_trades": "Display latest trades.",
     "!m/!meme": "Display a random meme image.",
-    "!s/!sol": "Display Solana Market status.",
+    "!sol": "Display Solana Market status.",
     "!h/!help": "Display command lists.",
 }
 
