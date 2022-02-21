@@ -50,9 +50,17 @@ class DoggoInfo(commands.Cog):
             listings = {doggo["tokenMint"]: doggo["price"] for doggo in listings}
 
             try:
-                doggo_id = int(msg_to_list[1])
-                if doggo_id in list(range(2500)):
-                    img_url = f"https://vaxxeddoggos.com/assets/doggos/{doggo_id}.png"
+                if msg_to_list[1] == "lnys":
+                    doggo_id = "lnys"
+                else:
+                    doggo_id = int(msg_to_list[1])
+                if doggo_id in list(range(2500)) + ["lnys"]:
+                    if doggo_id == "lnys":
+                        img_url = "https://bafybeifmq33adws6st7d4a3f4o2mk2w34654ggs4s5lkg4siuo6md6t4za.ipfs.dweb.link/0.png?ext=png"
+                    else:
+                        img_url = (
+                            f"https://vaxxeddoggos.com/assets/doggos/{doggo_id}.png"
+                        )
 
                     token = config.doggos[str(doggo_id)]["token"]
 
@@ -88,8 +96,12 @@ class DoggoInfo(commands.Cog):
                                 "{}: {} (1/1)".format(*attribute.values())
                             )
 
-                    formatted_attributes = "\n".join(attributes)
-                    formatted_attributes = "```{}```".format(formatted_attributes)
+                    if doggo_id == "lnys":
+                        formatted_attributes = "Lunar New Year Special!"
+                    else:
+                        formatted_attributes = "\n".join(attributes)
+                        formatted_attributes = "```{}```".format(formatted_attributes)
+
                     embed = discord.Embed(title=title, color=0xB48CCB, url=url)
                     embed.set_image(url=img_url)
                     embed.add_field(
